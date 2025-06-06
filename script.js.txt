@@ -1,0 +1,114 @@
+const textDisplay = document.getElementById("textDisplay");
+const inputArea = document.getElementById("inputArea");
+const timerEl = document.getElementById("timer");
+const wpmEl = document.getElementById("wpm");
+const accuracyEl = document.getElementById("accuracy");
+const restartBtn = document.getElementById("restartBtn");
+
+const texts = [
+  "The quick brown fox jumps over the lazy dog.",
+  "Typing speed test is a fun way to improve your keyboard skills.",
+  "Practice consistently to become a proficient typist.",
+  "JavaScript makes creating interactive web pages enjoyable.",
+  "Accuracy and speed are both crucial in efficient typing.",
+  "Learning to type faster enhances productivity in many tasks.",
+  "This test measures how many words you can type in a minute.",
+  "Make sure to focus on correctness as well as speed.",
+];
+
+let currentText = "";
+let startTime = null;
+let timerInterval = null;
+
+function chooseRandomText() {
+  const randomIndex = Math.floor(Math.random() * texts.length);
+  return texts[randomIndex];
+}
+
+function resetTest() {
+  currentText = chooseRandomText();
+  startTime = null;
+  clearInterval(timerInterval);
+  timerEl.textContent = "0";
+  wpmEl.textContent = "0";
+  accuracyEl.textContent = "100";
+  inputArea.value = "";
+  inputArea.disabled = false;
+  inputArea.focus();
+  renderTextDisplay("");
+}
+
+function renderTextDisplay(userInput) {
+  const characters = currentText.split("");
+  const inputChars = userInput.split("");
+  const spanElements = characters.map((char, index) => {
+    let className = "";
+    if (index < inputChars.length) {
+      if (char === inputChars[index]) {
+        className = "correct";
+      } else {
+        className = "incorrect";
+      }
+    }
+return `<span class="${className}">${char}</span>`;
+  });
+  textDisplay.innerHTML = spanElements.join("");
+}
+
+function calculateWPM(timeInSeconds, correctChars) {
+  if (timeInSeconds === 0) return 0;
+  const wordsTyped = correctChars / 5;
+  return Math.round(wordsTyped / (timeInSeconds / 60));
+}
+
+function calculateAccuracy(userInput) {
+  if (userInput.length === 0) return 100;
+  let correct = 0;
+  for (let i = 0; i < userInput.length; i++) {
+    if (userInput[i] === currentText[i]) {
+      correct++;
+    }
+  }
+  return Math.round((correct / userInput.length) * 100);
+}
+
+function updateStats() {
+  const now = new Date().getTime();
+  const timeElapsed = (now - startTime) / 1000;
+  const userInput = inputArea.value;
+  let correctChars = 0;
+  for (let i = 0; i < userInput.length; i++) {
+    if (userInput[i] === currentText[i]) {
+      correctChars++;
+    }
+  }
+  timerEl.textContent = Math.floor(timeElapsed);
+  wpmEl.textContent = calculateWPM(timeElapsed, correctChars);
+  accuracyEl.textContent = calculateAccuracy(userInput);
+}
+
+inputArea.addEventListener("input", () => {
+  const userInput = inputArea.value;
+
+  if (!startTime && userInput.length > 0) {
+    startTime = new Date().getTime();
+    timerInterval = setInterval(updateStats, 1000);
+  }
+
+  renderTextDisplay(userInput);
+
+  if (userInput === currentText) {
+    clearInterval(timerInterval);
+    updateStats();
+    setTimeout(() => {
+      resetTest();
+    }, 1000);
+  }
+});
+
+restartBtn.addEventListener("click", () => {
+  clearInterval(timerInterval);
+  resetTest();
+});
+
+resetTest();

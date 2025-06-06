@@ -1,0 +1,144 @@
+body {
+  background: #282c34;
+  color: #f0f0f0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  margin: 0;
+}
+
+.container {
+  background: #3c4048;
+  border-radius: 16px;
+  padding: 2rem;
+  width: 90%;
+  max-width: 700px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h1 {
+  margin-bottom: 1rem;
+  font-weight: 700;
+  color: #61dafb;
+  text-align: center;
+  user-select: none;
+  text-shadow: 0 2px 6px rgba(97, 218, 251, 0.7);
+}
+
+#textDisplay {
+  background: #20232a;
+  color: #d7dade;
+  font-size: 1.3rem;
+  line-height: 1.6;
+  padding: 1rem;
+  border-radius: 12px;
+  width: 100%;
+  min-height: 120px;
+  margin-bottom: 1rem;
+  user-select: none;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+#textDisplay span.correct {
+  color: #27ae60;
+}
+
+#textDisplay span.incorrect {
+  color: #e74c3c;
+  text-decoration: underline;
+}
+
+#inputArea {
+  width: 100%;
+  font-size: 1.2rem;
+  padding: 0.8rem 1rem;
+  border-radius: 12px;
+  border: 2px solid #61dafb;
+  background: #1c1f26;
+  color: #f0f0f0;
+  outline: none;
+  resize: none;
+  min-height: 80px;
+  box-sizing: border-box;
+  transition: border-color 0.3s;
+}
+
+#inputArea:focus {
+  border-color: #21c7ec;
+  box-shadow: 0 0 10px #21c7ec;
+}
+
+.stats {
+  margin-top: 1rem;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  font-weight: 600;
+  color: #abdbe3;
+  user-select: none;
+}
+
+.stat-item {
+  background: #20232a;
+  padding: 0.8rem 1.5rem;
+  border-radius: 12px;
+  min-width: 90px;
+  text-align: center;
+  box-shadow: inset 0 0 5px rgba(33, 199, 236, 0.5);
+}
+
+button#restartBtn {
+  margin-top: 1.8rem;
+  background: #61dafb;
+  color: #282c34;
+  font-weight: 700;
+  border: none;
+  padding: 0.8rem 2rem;
+  border-radius: 30px;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(97, 218, 251, 0.7);
+  transition: background 0.3s, transform 0.2s;
+  user-select: none;
+  align-self: center;
+}
+
+button#restartBtn:hover {
+  background: #21c7ec;
+  transform: scale(1.05);
+}
+
+footer {
+  margin-top: 2rem;
+  font-size: 0.8rem;
+  color: #666;
+  user-select: none;
+}
+
+@media (max-width: 480px) {
+  #textDisplay {
+    font-size: 1rem;
+    min-height: 100px;
+  }
+
+  #inputArea {
+    font-size: 1rem;
+    min-height: 70px;
+  }
+
+  .stats {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .stat-item {
+    width: 100%;
+  }
+}

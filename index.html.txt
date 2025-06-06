@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Typing Speed Test - Infinite Mode</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container" role="main" aria-label="Typing Speed Test Infinite Mode">
+    <h1>Typing Speed Test</h1>
+    <div id="textDisplay" aria-live="polite" aria-atomic="true"></div>
+    <textarea id="inputArea" placeholder="Start typing here..." aria-label="Typing input area" spellcheck="false"
+      autocomplete="off" autocorrect="off" autocapitalize="off"></textarea>
+    <div class="stats" aria-live="polite" aria-atomic="true">
+      <div class="stat-item" aria-label="Timer">Time: <span id="timer">0</span> s</div>
+      <div class="stat-item" aria-label="Words per minute">WPM: <span id="wpm">0</span></div>
+      <div class="stat-item" aria-label="Accuracy">Accuracy: <span id="accuracy">100</span>%</div>
+    </div>
+    <button id="restartBtn" aria-label="Restart the typing test">Restart</button>
+    <footer>Keep typing! New text will appear as you finish each one.</footer>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
